@@ -1,0 +1,11 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/sueur/Dev/Enssat/C++/Levenshtein
+-- Git submodule managment done
+-- Found Boost: /usr/local/lib/cmake/Boost-1.75.0/BoostConfig.cmake (found suitable version "1.75.0", minimum required is "1.50") found components: program_options 
+-- Found Boost: /usr/local/lib/cmake/Boost-1.75.0/BoostConfig.cmake (found suitable version "1.75.0", minimum required is "1.50") found components: system 
+-- Found Doxygen: /usr/local/bin/doxygen (found version "1.9.0") found components: doxygen missing components: dot
+-- Installation finalization
+-- Levenshtein configuration installed. You may consider to add this path as a CMAKE prefix. It can be done using the following command for instance : 
+	export CMAKE_PREFIX_PATH="/usr/local":$CMAKE_PREFIX_PATH
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/sueur/Dev/Enssat/C++/Levenshtein/cmake-build-debug

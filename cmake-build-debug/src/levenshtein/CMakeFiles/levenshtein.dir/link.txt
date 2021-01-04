@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc liblevenshtein.a  CMakeFiles/levenshtein.dir/levenshtein.cpp.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib liblevenshtein.a

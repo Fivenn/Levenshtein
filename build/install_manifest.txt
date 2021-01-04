@@ -1,0 +1,8 @@
+/Users/sueur/Dev/Enssat/C++/Levenshtein/lib/cmake/Levenshtein/LevenshteinTargets.cmake
+/Users/sueur/Dev/Enssat/C++/Levenshtein/lib/cmake/Levenshtein/LevenshteinTargets-release.cmake
+/Users/sueur/Dev/Enssat/C++/Levenshtein/lib/cmake/Levenshtein/LevenshteinConfig.cmake
+/Users/sueur/Dev/Enssat/C++/Levenshtein/lib/Levenshtein/libeasylogging++.a
+/Users/sueur/Dev/Enssat/C++/Levenshtein/lib/Levenshtein/libuseful.a
+/Users/sueur/Dev/Enssat/C++/Levenshtein/lib/Levenshtein/liboptionsParser.a
+/Users/sueur/Dev/Enssat/C++/Levenshtein/lib/Levenshtein/liblevenshtein.a
+/Users/sueur/Dev/Enssat/C++/Levenshtein/bin/levenshtein

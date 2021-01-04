@@ -1,0 +1,63 @@
+/**
+\mainpage Build your own Levenshtein
+
+\tableofcontents
+
+\b Attention, ce sujet manque probablement d'informations. Référez-vous à votre cours et demandez des informations complémetaires à votre enseignant.
+
+\section seq_dedalus Distance d'édition ou de Levenshtein
+
+La distance de levenshtein est utile pour calculer une distance entre des chaines de d'items, en particulier de mots ou de caracères. Elle consiste à trouver le nombre minimale d'éditions (insertion, suppression, remplacement) pour passe d'une suite d'items à une autre. En utilisant des heuristiques (exactes) de programmation dynamique, il est possible de la calculer en temps quadratique (de l'ordre du produit de la longueur des deux chaînes) et en espace linéaire (de l'ordre de la longueur de la chaîne la plus courte).
+
+\section seq_target Objectif du TP 
+
+Le but de ce TP est de vous faire coder votre mise en oeuvre de la distance de Levenshtein en C++. Deux versions sont à réaliser. La première reste quadratique en espace mais permet de d'afficher la matrice d'exploration et surtout d'afficer la liste des transformations optimale. La seconde est la version la plus econome en espace (dans sa mise en oeuvre exacte).
+
+
+\section seq_dispo Matériel et outils disponibles
+
+Pour ce TP, un squelette c++. Vous trouverez une documentation des fonctions utilisables dans l'onglet "Files" de ce document.
+
+Le code fourni utilise quelques outils qu'il peut être utile de connaître et d'utiliser : 
+\li Cette documentation est produite à l'aide de [\b Doxygen.](http://www.doxygen.nl/).
+\li Le fichier Readme.md contient lui aussi des informations pratiques sur le fonctionnement du code fourni.
+\li le script build.sh ne fait que des appels basiques au moteur de production (\a build \a automation) [\b CMake.](https://cmake.org/) en utilisant le fichier de configuration CMakeLists.txt. En particulier, un fichier \a .cpp ou \a .hpp ajouté dans un sous-répertoire de ./src/ sera automatiquement intégré à la chaîne de compilation.
+
+\section seq_demo Compilation 
+
+Pour compiler les sources, placez-vous dans le répertoire racine du projet et lancez la commande suivante :
+\verbatim 
+ 	  $ ./build.sh
+\endverbatim 
+Le script de compilation comporte plusieurs options consultables avec la commande :
+\verbatim 
+ 	  $ ./build.sh -h
+\endverbatim 
+
+En l'état, cette opération produit un unique fichier binaire disponible dans le sous-répertoire bin et nommé "levenshtein".
+L'usage de ce binaire est décrit par une aide accessible grâce à l'option "-h".
+\verbatim 
+ 	  $ ./bin/levenshtein -h
+\endverbatim 
+
+Un exemple d'utilisation du jeu pourra être :
+\verbatim 
+ 	  $ ./bin/levenshtein --w1 "Le petit chat" --w2 "Les chats sont petits"
+\endverbatim 
+
+La présente documentation peut être recompilée avec la commande suivante :
+\verbatim 
+ 	  $ ./build.sh --doc
+\endverbatim 
+
+\section seq_todo Travail attendue
+
+Deux versions sont à réaliser :
+\li Les fonctions init_lev_matrix, backtrace et compute_lev \(dans le fichier levenshtein.cpp\) pour pouvoir calculer la distance entre deux chaîne à l'aide d'une matrice de programmation dynamique et un fonction de retour arrière (backtracking) pour trouver la séquence de transformation optimale.
+\li La fonction compute_lev_compact \(dans le fichier levenshtein.cpp\) qui est une version compact pour calculer le levenshtein. Elle utilise les propriétés de programmation dynamique pour avoir une complexité spaciale linéaire en la taille d'une des chaîne de caractères. Pas besoin d'utiliser une matrice pour cette version. Vous pouvez observer la consomation mémoire avec l'outils \b massif de [\b valgrind,](https://www.valgrind.org/) et la visualiser avec [\b massif-visualizer.](https://github.com/KDE/massif-visualizer)
+
+\section Conclusion
+
+[\b YAPUKA.](http://dictionnaire.sensagent.leparisien.fr/yapuka/fr-fr/) !
+
+*/
