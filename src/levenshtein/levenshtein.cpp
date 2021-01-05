@@ -41,7 +41,7 @@ void levenshtein::Levenshtein::init_lev_matrix() {
     for (int j = 1; j <= wordH.size(); ++j) {
         LevNode levNode = LevNode();
         levNode.score = j;
-        m.set(levNode,0, j);
+        m.set(levNode, 0, j);
     }
 }
 
@@ -64,16 +64,31 @@ int64_t levenshtein::Levenshtein::compute_lev() {
         LOG(DEBUG) << "Fill levenshtein matrix";
         init_lev_matrix();
 
-        for (int i = 1; i <= wordV.size() ; ++i) {
-            for (int j = 0; j <= wordH.size(); ++j) {
+        int cost;
 
+        for (int i = 0; i <= wordV.size(); ++i) {
+            for (int j = 0; j <= wordH.size(); ++j) {
+                if (wordV[i] == wordH[j]) {
+                    cost = 0;
+                } else {
+                    cost = 1;
+                }
+
+                LevNode levNode = LevNode();
+
+                levNode.score = std::min(
+                        std::min(m.at(i - 1, j).score + 1, m.at(i, j - 1).score + 1),
+                        m.at(i - 1, j - 1).score + cost
+                );
+
+                m.set(levNode, i, j);
             }
+
         }
-        LOG(WARNING) << "TODO Levenshtein::compute_lev";
 
         computed = true;
     }
-    return 0.0;
+    return m.at(wordV.size(), wordH.size()).score;
 }
 
 int64_t levenshtein::Levenshtein::compute_lev_compact() {
