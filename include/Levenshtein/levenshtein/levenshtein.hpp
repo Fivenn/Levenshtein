@@ -11,154 +11,169 @@
  */
 namespace levenshtein {
 
-class Levenshtein {
- public:
-  Levenshtein(const std::string& wordH,
-              const std::string& wordV,
-              size_t cellWidth = 7);
-  Levenshtein() = delete;
-  Levenshtein(Levenshtein const& other) = default;
-  Levenshtein& operator=(Levenshtein const& other) = delete;
-  Levenshtein(Levenshtein&& other) = default;
-  Levenshtein& operator=(Levenshtein&& other) = delete;
-  ~Levenshtein() = default;
+    class Levenshtein {
+    public:
+        Levenshtein(const std::string &wordH,
+                    const std::string &wordV,
+                    size_t cellWidth = 7);
 
-  /**
-   * @brief Return the Levenshtein distance between the two word (and compute it
-   * if not already done).
-   * */
-  int64_t compute_lev();
+        Levenshtein() = delete;
 
+        Levenshtein(Levenshtein const &other) = default;
 
-  /**
-   * @brief Return the Levenshtein distance between the two word. Use a linear in space algorithme (but do not allows backtrack or display).
-   * */
-  int64_t compute_lev_compact();
+        Levenshtein &operator=(Levenshtein const &other) = delete;
 
-  typedef enum Operation {
-    Unk,        ///< Unknown
-    Ins,        ///< Insertion
-    Del,        ///< Deletion
-    Rep         ///< Replacement
-  } Operation;  ///< Operations available for edition.
+        Levenshtein(Levenshtein &&other) = default;
 
-  static const std::string op_to_string(Operation o);
-  
-  /**
-   * @brief Find an optimal sequence of operations to edit one word into the
-   * other.
-   * */
-  std::vector<Operation> backtrace();
+        Levenshtein &operator=(Levenshtein &&other) = delete;
 
-  /**
-   * @brief print a Levenshtein table (and compute it
-   * if not already done).
-   **/
-  friend std::ostream& operator<<(std::ostream& os, Levenshtein& l);
+        ~Levenshtein() = default;
 
- protected:
-  void init_lev_matrix();
+        /**
+         * @brief Return the Levenshtein distance between the two word (and compute it
+         * if not already done).
+         * */
+        int64_t compute_lev();
 
 
-  class LevNode {
-   public:
-    LevNode();
-    LevNode(LevNode const& other) = default;
-    LevNode& operator=(LevNode const& other) = default;
-    LevNode(LevNode&& other) = default;
-    LevNode& operator=(LevNode&& other) = default;
-    ~LevNode() = default;
+        /**
+         * @brief Return the Levenshtein distance between the two word. Use a linear in space algorithme (but do not allows backtrack or display).
+         * */
+        int64_t compute_lev_compact();
 
-    int64_t score;
-    Operation op;
-    bool bestPath;
-  };
+        typedef enum Operation {
+            Unk,        ///< Unknown
+            Ins,        ///< Insertion
+            Del,        ///< Deletion
+            Rep         ///< Replacement
+        } Operation;  ///< Operations available for edition.
 
-  bool computed;
+        static const std::string op_to_string(Operation o);
 
-  const std::string wordH;
-  const std::string wordV;
+        /**
+         * @brief Find an optimal sequence of operations to edit one word into the
+         * other.
+         * */
+        std::vector<Operation> backtrace();
 
-  useful::matrix::Matrix<LevNode> m;
+        /**
+         * @brief print a Levenshtein table (and compute it
+         * if not already done).
+         **/
+        friend std::ostream &operator<<(std::ostream &os, Levenshtein &l);
 
-  size_t cellWidth;
+    protected:
+        void init_lev_matrix();
 
- private:
-};
+
+        class LevNode {
+        public:
+            LevNode();
+
+            LevNode(LevNode const &other) = default;
+
+            LevNode &operator=(LevNode const &other) = default;
+
+            LevNode(LevNode &&other) = default;
+
+            LevNode &operator=(LevNode &&other) = default;
+
+            ~LevNode() = default;
+
+            int64_t score;
+            Operation op;
+            bool bestPath;
+        };
+
+        bool computed;
+
+        const std::string wordH;
+        const std::string wordV;
+
+        useful::matrix::Matrix<LevNode> m;
+
+        size_t cellWidth;
+
+    private:
+    };
 
 /**
  * A compressed levenshtein (linear in space)
- * */ 
-class LevenshteinComp {
- public:
-  LevenshteinComp(const std::string& wordH,
-              const std::string& wordV,
-              size_t cellWidth = 7);
-  LevenshteinComp() = delete;
-  LevenshteinComp(LevenshteinComp const& other) = default;
-  LevenshteinComp& operator=(LevenshteinComp const& other) = delete;
-  LevenshteinComp(LevenshteinComp&& other) = default;
-  LevenshteinComp& operator=(LevenshteinComp&& other) = delete;
-  ~LevenshteinComp() = default;
+ * */
+    class LevenshteinComp {
+    public:
+        LevenshteinComp(const std::string &wordH,
+                        const std::string &wordV,
+                        size_t cellWidth = 7);
 
-  /**
-   * @brief Return the Levenshtein distance between the two word (and compute it
-   * if not already done).
-   * */
-  int64_t compute_lev();
+        LevenshteinComp() = delete;
 
-  // typedef enum Operation {
-  //   Unk,        ///< Unknown
-  //   Ins,        ///< Insertion
-  //   Del,        ///< Deletion
-  //   Rep         ///< Replacement
-  // } Operation;  ///< Operations available for edition.
+        LevenshteinComp(LevenshteinComp const &other) = default;
 
-  // static const std::string op_to_string(Operation o);
-  
-  /**
-   * @brief Find an optimal sequence of operations to edit one word into the
-   * other.
-   * */
-  //std::vector<Operation> backtrace();
+        LevenshteinComp &operator=(LevenshteinComp const &other) = delete;
 
-  /**
-   * @brief print a Levenshtein table (and compute it
-   * if not already done).
-   **/
-  // friend std::ostream& operator<<(std::ostream& os, Levenshtein& l);
+        LevenshteinComp(LevenshteinComp &&other) = default;
 
- protected:
-  void init_lev_queue();
+        LevenshteinComp &operator=(LevenshteinComp &&other) = delete;
+
+        ~LevenshteinComp() = default;
+
+        /**
+         * @brief Return the Levenshtein distance between the two word (and compute it
+         * if not already done).
+         * */
+        int64_t compute_lev();
+
+        // typedef enum Operation {
+        //   Unk,        ///< Unknown
+        //   Ins,        ///< Insertion
+        //   Del,        ///< Deletion
+        //   Rep         ///< Replacement
+        // } Operation;  ///< Operations available for edition.
+
+        // static const std::string op_to_string(Operation o);
+
+        /**
+         * @brief Find an optimal sequence of operations to edit one word into the
+         * other.
+         * */
+        //std::vector<Operation> backtrace();
+
+        /**
+         * @brief print a Levenshtein table (and compute it
+         * if not already done).
+         **/
+        // friend std::ostream& operator<<(std::ostream& os, Levenshtein& l);
+
+    protected:
+        void init_lev_queue();
 
 
+        bool computed;
 
-  bool computed;
+        const std::string wordH;
+        const std::string wordV;
 
-  const std::string wordH;
-  const std::string wordV;
+        size_t cellWidth;
 
-  size_t cellWidth;
-
- private:
-};
-
+    private:
+    };
 
 
 /**
  *@brief Print "Hello world!".
  */
-void print_hello();
+    void print_hello();
 
 /**
  * @brief Print a random integer between 0 and 100.
  */
-void print_rnd_int();
+    void print_rnd_int();
 
 /**
  * @brief Test the matrix structure.
  */
-void test_mat();
+    void test_mat();
 
 }  // namespace levenshtein
 

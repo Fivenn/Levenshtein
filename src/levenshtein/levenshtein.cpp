@@ -32,7 +32,17 @@ levenshtein::Levenshtein::Levenshtein(const std::string &wordH,
 }
 
 void levenshtein::Levenshtein::init_lev_matrix() {
-    LOG(WARNING) << "TODO Levenshtein::init_lev_matrix";
+    m.resize(wordV.size() + 1, wordH.size() + 1);
+    for (int i = 1; i <= wordV.size(); ++i) {
+        LevNode levNode = LevNode();
+        levNode.score = i;
+        m.set(levNode, i, 0);
+    }
+    for (int j = 1; j <= wordH.size(); ++j) {
+        LevNode levNode = LevNode();
+        levNode.score = j;
+        m.set(levNode,0, j);
+    }
 }
 
 std::vector<levenshtein::Levenshtein::Operation>
@@ -54,6 +64,11 @@ int64_t levenshtein::Levenshtein::compute_lev() {
         LOG(DEBUG) << "Fill levenshtein matrix";
         init_lev_matrix();
 
+        for (int i = 1; i <= wordV.size() ; ++i) {
+            for (int j = 0; j <= wordH.size(); ++j) {
+
+            }
+        }
         LOG(WARNING) << "TODO Levenshtein::compute_lev";
 
         computed = true;
