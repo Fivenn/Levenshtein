@@ -33,14 +33,17 @@ levenshtein::Levenshtein::Levenshtein(const std::string &wordH,
 
 void levenshtein::Levenshtein::init_lev_matrix() {
     m.resize(wordV.size() + 1, wordH.size() + 1);
-    for (int i = 1; i <= wordV.size(); ++i) {
+
+    for (int i = 0; i <= wordV.size(); ++i) {
         LevNode levNode = LevNode();
         levNode.score = i;
+        levNode.op = Ins;
         m.set(levNode, i, 0);
     }
-    for (int j = 1; j <= wordH.size(); ++j) {
+    for (int j = 0; j <= wordH.size(); ++j) {
         LevNode levNode = LevNode();
         levNode.score = j;
+        levNode.op = Del;
         m.set(levNode, 0, j);
     }
 }
@@ -54,6 +57,7 @@ levenshtein::Levenshtein::backtrace() {
     std::vector<levenshtein::Levenshtein::Operation> r;
     r.reserve(m.nb_col() + m.nb_row());
 
+
     LOG(WARNING) << "TODO Levenshtein::backtrace";
 
     return r;
@@ -64,31 +68,27 @@ int64_t levenshtein::Levenshtein::compute_lev() {
         LOG(DEBUG) << "Fill levenshtein matrix";
         init_lev_matrix();
 
-        int cost;
+        int substitutionCost;
 
-        for (int i = 0; i <= wordV.size(); ++i) {
-            for (int j = 0; j <= wordH.size(); ++j) {
-                if (wordV[i] == wordH[j]) {
-                    cost = 0;
+        for (int i = 1; i <= m.nb_col(); ++i) {
+            for (int j = 1; j < m.nb_row(); ++j) {
+                if (wordH[i] == wordV[j]) {
+                    substitutionCost = 0;
                 } else {
-                    cost = 1;
+                    substitutionCost = 1;
                 }
 
                 LevNode levNode = LevNode();
-
-                levNode.score = std::min(
-                        std::min(m.at(i - 1, j).score + 1, m.at(i, j - 1).score + 1),
-                        m.at(i - 1, j - 1).score + cost
-                );
+                levNode.score = std::min(std::min(m.at(i - 1, j).score + 1, m.at(i, j - 1).score + 1),
+                                         m.at(i - 1, j - 1).score + substitutionCost);
 
                 m.set(levNode, i, j);
             }
-
         }
 
         computed = true;
     }
-    return m.at(wordV.size(), wordH.size()).score;
+    return m.at(wordH.size(), wordV.size()).score;
 }
 
 int64_t levenshtein::Levenshtein::compute_lev_compact() {
